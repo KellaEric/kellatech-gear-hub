@@ -3,19 +3,25 @@ import { ArrowRight, Monitor, Cpu, Printer, Wifi, Laptop, Mouse } from "lucide-r
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
-import { products } from "@/data/products";
+import { useProducts } from "@/data/products";
 
-const categoryIcons = [
-  { name: "Laptops", icon: Laptop, count: products.filter(p => p.category === "Laptops").length },
-  { name: "Desktops", icon: Cpu, count: products.filter(p => p.category === "Desktops").length },
-  { name: "Monitors", icon: Monitor, count: products.filter(p => p.category === "Monitors").length },
-  { name: "Printers", icon: Printer, count: products.filter(p => p.category === "Printers").length },
-  { name: "Accessories", icon: Mouse, count: products.filter(p => p.category === "Accessories").length },
-  { name: "Networking", icon: Wifi, count: products.filter(p => p.category === "Networking").length },
+const categoryDefs = [
+  { name: "Laptops", icon: Laptop },
+  { name: "Desktops", icon: Cpu },
+  { name: "Monitors", icon: Monitor },
+  { name: "Printers", icon: Printer },
+  { name: "Accessories", icon: Mouse },
+  { name: "Networking", icon: Wifi },
 ];
 
 const Index = () => {
+  const { data: products = [] } = useProducts();
   const featured = products.filter((p) => p.badge).slice(0, 8);
+
+  const categoryIcons = categoryDefs.map((c) => ({
+    ...c,
+    count: products.filter((p) => p.category === c.name).length,
+  }));
 
   return (
     <div className="min-h-screen bg-background">
@@ -38,9 +44,7 @@ const Index = () => {
             </h1>
 
             <div className="max-w-3xl mx-auto bg-card/50 border border-primary/20 rounded-xl p-6 backdrop-blur-sm mb-8">
-              <p className="text-lg sm:text-xl text-foreground font-semibold mb-3">
-                Computers &amp; Accessories Store
-              </p>
+              <p className="text-lg sm:text-xl text-foreground font-semibold mb-3">Computers &amp; Accessories Store</p>
               <p className="text-muted-foreground leading-relaxed">
                 Shop laptops, desktops, monitors, printers, computer parts, accessories, and networking tools — all at competitive prices in Ghana Cedis.
               </p>
@@ -55,16 +59,10 @@ const Index = () => {
             </div>
 
             <div className="flex flex-wrap justify-center gap-4">
-              <Link
-                to="/shop"
-                className="inline-flex items-center gap-2 px-8 py-3.5 gradient-primary text-primary-foreground font-bold rounded-lg glow-primary hover:opacity-90 transition-all text-lg"
-              >
+              <Link to="/shop" className="inline-flex items-center gap-2 px-8 py-3.5 gradient-primary text-primary-foreground font-bold rounded-lg glow-primary hover:opacity-90 transition-all text-lg">
                 Shop Now <ArrowRight className="w-5 h-5" />
               </Link>
-              <Link
-                to="/contact"
-                className="inline-flex items-center gap-2 px-8 py-3.5 bg-foreground/10 border-2 border-foreground/30 text-foreground font-bold rounded-lg hover:bg-primary/20 hover:border-primary transition-all text-lg"
-              >
+              <Link to="/contact" className="inline-flex items-center gap-2 px-8 py-3.5 bg-foreground/10 border-2 border-foreground/30 text-foreground font-bold rounded-lg hover:bg-primary/20 hover:border-primary transition-all text-lg">
                 Contact Us
               </Link>
             </div>
@@ -78,14 +76,9 @@ const Index = () => {
           <h2 className="text-3xl sm:text-4xl font-black text-foreground mb-3">Shop by Category</h2>
           <p className="text-muted-foreground">Find exactly what you need</p>
         </div>
-
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
           {categoryIcons.map(({ name, icon: Icon, count }) => (
-            <Link
-              key={name}
-              to={`/shop?category=${name}`}
-              className="bg-card border border-primary/10 rounded-xl p-6 text-center card-hover group"
-            >
+            <Link key={name} to={`/shop?category=${name}`} className="bg-card border border-primary/10 rounded-xl p-6 text-center card-hover group">
               <div className="w-12 h-12 mx-auto mb-3 rounded-lg gradient-primary flex items-center justify-center text-primary-foreground group-hover:scale-110 transition-transform">
                 <Icon className="w-6 h-6" />
               </div>
@@ -96,27 +89,20 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Featured Products */}
+      {/* Featured */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
         <div className="flex items-center justify-between mb-10">
           <div>
             <h2 className="text-3xl sm:text-4xl font-black text-foreground mb-2">Featured Products</h2>
             <p className="text-muted-foreground">Top picks from our store</p>
           </div>
-          <Link
-            to="/shop"
-            className="hidden sm:inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all"
-          >
+          <Link to="/shop" className="hidden sm:inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all">
             View All <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
-
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {featured.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+          {featured.map((product) => <ProductCard key={product.id} product={product} />)}
         </div>
-
         <div className="sm:hidden text-center mt-8">
           <Link to="/shop" className="inline-flex items-center gap-2 px-6 py-3 gradient-primary text-primary-foreground font-semibold rounded-lg">
             View All Products <ArrowRight className="w-4 h-4" />
@@ -131,10 +117,7 @@ const Index = () => {
           <p className="text-primary-foreground/80 max-w-2xl mx-auto mb-6">
             Beyond selling hardware, we offer Software Development, IT Support, Mentoring, Hardware Repairs, CCTV Camera Installation, and more.
           </p>
-          <Link
-            to="/contact"
-            className="inline-flex items-center gap-2 px-8 py-3 bg-background text-primary font-bold rounded-lg hover:bg-foreground hover:text-background transition-all"
-          >
+          <Link to="/contact" className="inline-flex items-center gap-2 px-8 py-3 bg-background text-primary font-bold rounded-lg hover:bg-foreground hover:text-background transition-all">
             Get in Touch <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
