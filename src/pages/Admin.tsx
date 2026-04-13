@@ -82,7 +82,8 @@ const Admin = () => {
 
   const openCreate = () => {
     setEditing(null);
-    setForm({ ...emptyProduct });
+    setForm({ ...emptyProduct, category: categoryOptions[0] as string });
+    setSpecsInput("");
     setSpecsInput("");
     setCreating(true);
   };
