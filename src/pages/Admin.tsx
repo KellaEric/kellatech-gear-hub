@@ -9,21 +9,31 @@ import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const categoryOptions = categories.filter((c) => c !== "All");
+const categoryOptions: string[] = categories.filter((c) => c !== "All") as unknown as string[];
 
-const emptyProduct = {
+interface FormData {
+  name: string;
+  category: string;
+  price: number;
+  original_price: number | null;
+  description: string;
+  specs: string[];
+  image: string;
+  badge: string | null;
+  in_stock: boolean;
+}
+
+const emptyProduct: FormData = {
   name: "",
   category: categoryOptions[0],
   price: 0,
-  original_price: null as number | null,
+  original_price: null,
   description: "",
-  specs: [] as string[],
+  specs: [],
   image: "",
-  badge: "" as string | null,
+  badge: "",
   in_stock: true,
 };
-
-type FormData = typeof emptyProduct;
 
 const Admin = () => {
   const { user, loading: authLoading } = useAuth();
