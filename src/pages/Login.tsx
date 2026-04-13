@@ -76,6 +76,10 @@ const Login = () => {
               </div>
             </div>
 
+            <div className="flex justify-end">
+              <Link to="/forgot-password" className="text-xs text-primary hover:underline">Forgot password?</Link>
+            </div>
+
             <button type="submit" disabled={loading}
               className="w-full py-3.5 gradient-primary text-primary-foreground font-bold rounded-lg glow-primary hover:opacity-90 transition-all disabled:opacity-50">
               {loading ? "Signing in..." : "Sign In"}
