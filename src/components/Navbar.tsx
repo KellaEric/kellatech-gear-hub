@@ -1,6 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { ShoppingCart, Menu, X, User, LogOut } from "lucide-react";
+import { ShoppingCart, Menu, X, User, LogOut, Shield } from "lucide-react";
+import { useAdmin } from "@/hooks/useAdmin";
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
 import logo from "@/assets/kella-logo.jpeg";
@@ -15,6 +16,7 @@ const navLinks = [
 const Navbar = () => {
   const { totalItems } = useCart();
   const { user, signOut } = useAuth();
+  const { data: isAdmin } = useAdmin();
   const location = useLocation();
   const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -62,10 +64,18 @@ const Navbar = () => {
           </Link>
 
           {user ? (
-            <button onClick={handleSignOut}
-              className="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg border border-primary/50 text-sm font-semibold text-muted-foreground hover:bg-primary/10 hover:border-primary hover:text-foreground transition-all">
-              <LogOut className="w-4 h-4" /> Sign Out
-            </button>
+            <div className="hidden md:flex items-center gap-2">
+              {isAdmin && (
+                <Link to="/admin"
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg border border-primary/50 text-sm font-semibold text-primary hover:bg-primary/10 transition-all">
+                  <Shield className="w-4 h-4" /> Admin
+                </Link>
+              )}
+              <button onClick={handleSignOut}
+                className="flex items-center gap-2 px-4 py-2 rounded-lg border border-primary/50 text-sm font-semibold text-muted-foreground hover:bg-primary/10 hover:border-primary hover:text-foreground transition-all">
+                <LogOut className="w-4 h-4" /> Sign Out
+              </button>
+            </div>
           ) : (
             <>
               <Link to="/login"
@@ -95,10 +105,18 @@ const Navbar = () => {
           ))}
           <div className="flex gap-3 pt-2">
             {user ? (
-              <button onClick={() => { handleSignOut(); setMobileOpen(false); }}
-                className="flex-1 text-center py-2 rounded-lg border border-primary/50 text-sm font-semibold text-muted-foreground">
-                Sign Out
-              </button>
+              <>
+                {isAdmin && (
+                  <Link to="/admin" onClick={() => setMobileOpen(false)}
+                    className="block py-2 font-semibold text-primary">
+                    <Shield className="w-4 h-4 inline mr-1" /> Admin
+                  </Link>
+                )}
+                <button onClick={() => { handleSignOut(); setMobileOpen(false); }}
+                  className="flex-1 text-center py-2 rounded-lg border border-primary/50 text-sm font-semibold text-muted-foreground">
+                  Sign Out
+                </button>
+              </>
             ) : (
               <>
                 <Link to="/login" onClick={() => setMobileOpen(false)} className="flex-1 text-center py-2 rounded-lg border border-primary/50 text-sm font-semibold text-muted-foreground">Login</Link>
