@@ -14,6 +14,60 @@ export type Database = {
   }
   public: {
     Tables: {
+      orders: {
+        Row: {
+          created_at: string
+          customer_email: string
+          customer_name: string
+          customer_phone: string | null
+          id: string
+          items: Json
+          payment_method: string
+          payment_reference: string | null
+          shipping_address: string
+          shipping_city: string
+          shipping_region: string | null
+          status: string
+          total: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          customer_email: string
+          customer_name: string
+          customer_phone?: string | null
+          id?: string
+          items?: Json
+          payment_method?: string
+          payment_reference?: string | null
+          shipping_address: string
+          shipping_city: string
+          shipping_region?: string | null
+          status?: string
+          total: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          customer_email?: string
+          customer_name?: string
+          customer_phone?: string | null
+          id?: string
+          items?: Json
+          payment_method?: string
+          payment_reference?: string | null
+          shipping_address?: string
+          shipping_city?: string
+          shipping_region?: string | null
+          status?: string
+          total?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       products: {
         Row: {
           badge: string | null

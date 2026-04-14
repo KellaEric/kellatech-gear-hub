@@ -87,9 +87,9 @@ const Cart = () => {
             <span className="text-lg text-foreground font-semibold">Total</span>
             <span className="text-2xl font-black text-gradient">{formatPrice(totalPrice)}</span>
           </div>
-          <button className="w-full py-4 gradient-primary text-primary-foreground font-bold text-lg rounded-xl glow-primary hover:opacity-90 transition-all">
+          <Link to="/checkout" className="block w-full py-4 gradient-primary text-primary-foreground font-bold text-lg rounded-xl glow-primary hover:opacity-90 transition-all text-center">
             Proceed to Checkout
-          </button>
+          </Link>
           <Link to="/shop" className="block text-center text-sm text-primary font-semibold mt-4 hover:underline">
             ← Continue Shopping
           </Link>
