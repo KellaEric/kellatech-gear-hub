@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { Plus, Pencil, Trash2, Package, Search, X, Save, Loader2 } from "lucide-react";
+import { Plus, Pencil, Trash2, Package, Search, X, Save, Loader2, ShoppingBag } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useProducts, categories, type Product } from "@/data/products";
 import { useAdmin } from "@/hooks/useAdmin";
@@ -8,6 +8,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import OrdersManagement from "@/components/admin/OrdersManagement";
 
 const categoryOptions: string[] = categories.filter((c) => c !== "All") as unknown as string[];
 
@@ -42,6 +43,7 @@ const Admin = () => {
   const queryClient = useQueryClient();
   const { toast } = useToast();
 
+  const [tab, setTab] = useState<"products" | "orders">("products");
   const [search, setSearch] = useState("");
   const [catFilter, setCatFilter] = useState("All");
   const [editing, setEditing] = useState<string | null>(null);
@@ -186,11 +188,38 @@ const Admin = () => {
             </h1>
             <p className="text-muted-foreground text-sm mt-1">Manage your product catalog</p>
           </div>
-          <button onClick={openCreate}
-            className="px-5 py-2.5 gradient-primary text-primary-foreground font-bold rounded-lg glow-primary hover:opacity-90 transition-all flex items-center gap-2">
-            <Plus className="w-4 h-4" /> Add Product
+          {tab === "products" && (
+            <button onClick={openCreate}
+              className="px-5 py-2.5 gradient-primary text-primary-foreground font-bold rounded-lg glow-primary hover:opacity-90 transition-all flex items-center gap-2">
+              <Plus className="w-4 h-4" /> Add Product
+            </button>
+          )}
+        </div>
+
+        {/* Tabs */}
+        <div className="flex gap-2 mb-6 border-b border-primary/20">
+          <button
+            onClick={() => setTab("products")}
+            className={`px-4 py-2.5 font-semibold flex items-center gap-2 border-b-2 transition-colors ${
+              tab === "products" ? "border-primary text-primary" : "border-transparent text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <Package className="w-4 h-4" /> Products
+          </button>
+          <button
+            onClick={() => setTab("orders")}
+            className={`px-4 py-2.5 font-semibold flex items-center gap-2 border-b-2 transition-colors ${
+              tab === "orders" ? "border-primary text-primary" : "border-transparent text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <ShoppingBag className="w-4 h-4" /> Orders
           </button>
         </div>
+
+        {tab === "orders" && <OrdersManagement />}
+
+        {tab === "products" && (
+        <div>
 
         {/* Form Modal */}
         {showForm && (
@@ -369,6 +398,8 @@ const Admin = () => {
               </table>
             </div>
           </div>
+        )}
+        </div>
         )}
       </div>
       <Footer />
