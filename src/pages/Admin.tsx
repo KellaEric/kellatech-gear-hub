@@ -216,16 +216,10 @@ const Admin = () => {
           </button>
         </div>
 
-        {tab === "orders" ? (
-          <OrdersManagement />
-        ) : (
-          <>
-        </>
-        )}
+        {tab === "orders" && <OrdersManagement />}
 
         {tab === "products" && (
-        <></>
-        )}
+        <div>
 
         {/* Form Modal */}
         {showForm && (
@@ -404,6 +398,8 @@ const Admin = () => {
               </table>
             </div>
           </div>
+        )}
+        </div>
         )}
       </div>
       <Footer />
