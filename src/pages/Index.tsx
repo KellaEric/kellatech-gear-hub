@@ -3,6 +3,7 @@ import { ArrowRight, Monitor, Cpu, Printer, Wifi, Laptop, Mouse } from "lucide-r
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
+import FeaturedCarousel from "@/components/FeaturedCarousel";
 import { useProducts } from "@/data/products";
 
 const categoryDefs = [
@@ -17,6 +18,7 @@ const categoryDefs = [
 const Index = () => {
   const { data: products = [] } = useProducts();
   const featured = products.filter((p) => p.badge).slice(0, 8);
+  const showcase = (featured.length > 0 ? featured : products).slice(0, 6);
 
   const categoryIcons = categoryDefs.map((c) => ({
     ...c,
@@ -69,6 +71,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Slow-mo featured carousel */}
+      <FeaturedCarousel products={showcase} />
 
       {/* Categories */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
