@@ -297,13 +297,24 @@ const Admin = () => {
                 </div>
 
                 <div className="sm:col-span-2">
-                  <label className="block text-sm font-semibold text-foreground mb-1">Image URL *</label>
-                  <input value={form.image} onChange={(e) => setForm({ ...form, image: e.target.value })}
-                    placeholder="https://..."
-                    className="w-full px-4 py-2.5 bg-muted border border-primary/20 rounded-lg text-foreground focus:outline-none focus:border-primary" />
-                  {form.image && (
-                    <img src={form.image} alt="Preview" className="w-20 h-20 object-cover rounded-lg mt-2 border border-primary/20" />
-                  )}
+                  <label className="block text-sm font-semibold text-foreground mb-1">Product Image *</label>
+                  <div className="flex items-center gap-3">
+                    <label className="flex-1 cursor-pointer flex items-center justify-center gap-2 px-4 py-2.5 bg-muted border border-dashed border-primary/40 rounded-lg text-foreground hover:border-primary transition-colors">
+                      {uploading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
+                      <span className="text-sm">{uploading ? "Uploading..." : form.image ? "Change image" : "Choose image from device"}</span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                        disabled={uploading}
+                        className="hidden"
+                      />
+                    </label>
+                    {form.image && (
+                      <img src={form.image} alt="Preview" className="w-16 h-16 object-cover rounded-lg border border-primary/20" />
+                    )}
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-1">Max 5MB · JPG, PNG, WEBP</p>
                 </div>
 
                 <div className="sm:col-span-2">
