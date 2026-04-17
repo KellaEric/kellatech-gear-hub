@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { Plus, Pencil, Trash2, Package, Search, X, Save, Loader2, ShoppingBag } from "lucide-react";
+import { Plus, Pencil, Trash2, Package, Search, X, Save, Loader2, ShoppingBag, Upload } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useProducts, categories, type Product } from "@/data/products";
 import { useAdmin } from "@/hooks/useAdmin";
@@ -52,6 +52,35 @@ const Admin = () => {
   const [specsInput, setSpecsInput] = useState("");
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState<string | null>(null);
+  const [uploading, setUploading] = useState(false);
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (!file.type.startsWith("image/")) {
+      toast({ title: "Please select an image file", variant: "destructive" });
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      toast({ title: "Image must be under 5MB", variant: "destructive" });
+      return;
+    }
+    setUploading(true);
+    const ext = file.name.split(".").pop();
+    const fileName = `${crypto.randomUUID()}.${ext}`;
+    const { error: uploadError } = await supabase.storage
+      .from("product-images")
+      .upload(fileName, file, { cacheControl: "3600", upsert: false });
+    if (uploadError) {
+      toast({ title: "Upload failed", description: uploadError.message, variant: "destructive" });
+      setUploading(false);
+      return;
+    }
+    const { data: { publicUrl } } = supabase.storage.from("product-images").getPublicUrl(fileName);
+    setForm((f) => ({ ...f, image: publicUrl }));
+    setUploading(false);
+    toast({ title: "Image uploaded!" });
+  };
 
   if (authLoading || roleLoading) {
     return (
