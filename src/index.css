@@ -54,6 +54,10 @@
     @apply border-border;
   }
 
+  html, body {
+    @apply overflow-x-hidden;
+  }
+
   body {
     @apply bg-background text-foreground font-sans;
     font-family: 'Archivo', -apple-system, sans-serif;

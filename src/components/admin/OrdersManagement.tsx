@@ -125,7 +125,7 @@ const OrdersManagement = () => {
             {filtered.map((o) => {
               const isOpen = expanded === o.id;
               return (
-                <div key={o.id} className="p-4">
+                <div key={o.id} className="p-3 sm:p-4">
                   <div className="flex flex-col md:flex-row md:items-center gap-3">
                     <button
                       onClick={() => setExpanded(isOpen ? null : o.id)}
@@ -139,8 +139,8 @@ const OrdersManagement = () => {
                         </p>
                       </div>
                     </button>
-                    <div className="flex items-center gap-3 flex-wrap">
-                      <span className="font-bold text-foreground">GH₵{Number(o.total).toLocaleString()}</span>
+                    <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+                      <span className="font-bold text-foreground whitespace-nowrap">GH₵{Number(o.total).toLocaleString()}</span>
                       <span className={`text-xs font-semibold px-2 py-1 rounded-full ${statusColor(o.status)}`}>
                         {o.status}
                       </span>
@@ -148,7 +148,7 @@ const OrdersManagement = () => {
                         value={o.status}
                         disabled={updating === o.id}
                         onChange={(e) => updateStatus(o.id, e.target.value as OrderStatus)}
-                        className="px-3 py-1.5 bg-muted border border-primary/20 rounded-lg text-foreground text-xs focus:outline-none focus:border-primary disabled:opacity-50"
+                        className="px-2 sm:px-3 py-1.5 bg-muted border border-primary/20 rounded-lg text-foreground text-xs focus:outline-none focus:border-primary disabled:opacity-50"
                       >
                         {STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}
                       </select>
