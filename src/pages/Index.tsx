@@ -41,8 +41,8 @@ const Index = () => {
             </span>
 
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black text-foreground leading-[1.1] mb-6">
-              Your All-in-One<br />
-              <span className="text-gradient">Technology Partner</span>
+              Your All-in-One Technology Partner to build{" "}
+              <span className="text-gradient">next-generation Tech solutions and ecosystem</span>
             </h1>
 
             <div className="max-w-3xl mx-auto bg-card/50 border border-primary/20 rounded-xl p-6 backdrop-blur-sm mb-8">
