@@ -41,8 +41,15 @@ const Index = () => {
             </span>
 
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black text-foreground leading-[1.1] mb-6">
-              Your All-in-One Technology Partner to build{" "}
-              <span className="text-gradient">next-generation Tech solutions and ecosystem</span>
+              <span className="inline-block opacity-0 animate-[fade-in_0.8s_ease-out_0.1s_forwards]">Your</span>{" "}
+              <span className="inline-block opacity-0 animate-[fade-in_0.8s_ease-out_0.25s_forwards]">All-in-One</span>{" "}
+              <span className="inline-block opacity-0 animate-[fade-in_0.8s_ease-out_0.4s_forwards]">Technology</span>{" "}
+              <span className="inline-block opacity-0 animate-[fade-in_0.8s_ease-out_0.55s_forwards]">Partner</span>{" "}
+              <span className="inline-block opacity-0 animate-[fade-in_0.8s_ease-out_0.7s_forwards]">to</span>{" "}
+              <span className="inline-block opacity-0 animate-[fade-in_0.8s_ease-out_0.85s_forwards]">build</span>{" "}
+              <span className="text-gradient inline-block opacity-0 animate-[fade-in_1s_ease-out_1.1s_forwards] bg-[length:200%_auto] animate-[fade-in_1s_ease-out_1.1s_forwards,shimmer_3s_ease-in-out_2s_infinite]">
+                next-generation Tech solutions and ecosystem
+              </span>
             </h1>
 
             <div className="max-w-3xl mx-auto bg-card/50 border border-primary/20 rounded-xl p-6 backdrop-blur-sm mb-8">
