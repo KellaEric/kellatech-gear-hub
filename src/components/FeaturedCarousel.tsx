@@ -41,7 +41,7 @@ const FeaturedCarousel = ({ products, intervalMs = 6000 }: FeaturedCarouselProps
         onMouseLeave={() => setPaused(false)}
       >
         {/* Slides */}
-        <div className="relative h-[460px] sm:h-[520px]">
+        <div className="relative h-[420px] sm:h-[480px] md:h-[520px]">
           {products.map((p, i) => {
             const active = i === index;
             return (
@@ -67,7 +67,7 @@ const FeaturedCarousel = ({ products, intervalMs = 6000 }: FeaturedCarouselProps
 
                 {/* Content */}
                 <div className="relative z-10 grid md:grid-cols-2 h-full">
-                  <div className="flex flex-col justify-center p-8 sm:p-12 lg:p-16">
+                  <div className="flex flex-col justify-center p-6 sm:p-10 lg:p-16">
                     {p.badge && (
                       <span
                         className={`self-start inline-flex items-center gap-2 bg-primary/15 border border-primary/30 text-primary font-bold text-xs px-3 py-1.5 rounded-full mb-4 transition-all duration-1000 ${
@@ -78,7 +78,7 @@ const FeaturedCarousel = ({ products, intervalMs = 6000 }: FeaturedCarouselProps
                       </span>
                     )}
                     <h3
-                      className={`text-3xl sm:text-4xl lg:text-5xl font-black text-foreground leading-tight mb-3 transition-all duration-[1200ms] delay-150 ${
+                      className={`text-2xl sm:text-3xl lg:text-5xl font-black text-foreground leading-tight mb-3 line-clamp-3 transition-all duration-[1200ms] delay-150 ${
                         active ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
                       }`}
                     >
@@ -152,16 +152,16 @@ const FeaturedCarousel = ({ products, intervalMs = 6000 }: FeaturedCarouselProps
             <button
               onClick={() => go(-1)}
               aria-label="Previous"
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-background/70 backdrop-blur border border-primary/20 text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all flex items-center justify-center"
+              className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-background/70 backdrop-blur border border-primary/20 text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all flex items-center justify-center"
             >
-              <ChevronLeft className="w-5 h-5" />
+              <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
             <button
               onClick={() => go(1)}
               aria-label="Next"
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-background/70 backdrop-blur border border-primary/20 text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all flex items-center justify-center"
+              className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-background/70 backdrop-blur border border-primary/20 text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all flex items-center justify-center"
             >
-              <ChevronRight className="w-5 h-5" />
+              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
           </>
         )}
