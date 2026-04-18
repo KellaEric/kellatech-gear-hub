@@ -20,6 +20,7 @@ import Orders from "./pages/Orders";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 import AssistantWidget from "./components/AssistantWidget";
+import WhatsAppButton from "./components/WhatsAppButton";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,7 @@ const App = () => (
               <Route path="*" element={<NotFound />} />
             </Routes>
             <AssistantWidget />
+            <WhatsAppButton />
           </BrowserRouter>
         </CartProvider>
       </AuthProvider>
