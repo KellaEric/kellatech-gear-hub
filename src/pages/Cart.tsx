@@ -43,40 +43,54 @@ const Cart = () => {
 
         <div className="space-y-4 mb-8">
           {items.map(({ product, quantity }) => (
-            <div key={product.id} className="bg-card border border-primary/10 rounded-xl p-4 flex items-center gap-4">
-              <img src={product.image} alt={product.name} className="w-20 h-20 rounded-lg object-cover" />
-              <div className="flex-1 min-w-0">
-                <Link to={`/product/${product.id}`} className="font-bold text-foreground text-sm hover:text-primary transition-colors line-clamp-1">
-                  {product.name}
-                </Link>
-                <p className="text-xs text-muted-foreground">{product.category}</p>
-                <p className="font-bold text-gradient text-sm mt-1">{formatPrice(product.price)}</p>
-              </div>
-
-              <div className="flex items-center gap-2">
+            <div key={product.id} className="bg-card border border-primary/10 rounded-xl p-3 sm:p-4 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+              <div className="flex items-start gap-3 sm:gap-4 flex-1 min-w-0">
+                <img src={product.image} alt={product.name} className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg object-cover shrink-0" />
+                <div className="flex-1 min-w-0">
+                  <Link to={`/product/${product.id}`} className="font-bold text-foreground text-sm hover:text-primary transition-colors line-clamp-2">
+                    {product.name}
+                  </Link>
+                  <p className="text-xs text-muted-foreground">{product.category}</p>
+                  <p className="font-bold text-gradient text-sm mt-1">{formatPrice(product.price)}</p>
+                </div>
                 <button
-                  onClick={() => updateQuantity(product.id, quantity - 1)}
-                  className="p-1.5 rounded-lg bg-muted text-foreground hover:bg-primary/20 transition-colors"
+                  onClick={() => removeFromCart(product.id)}
+                  className="p-2 text-muted-foreground hover:text-destructive transition-colors sm:hidden shrink-0"
+                  aria-label="Remove"
                 >
-                  <Minus className="w-3.5 h-3.5" />
-                </button>
-                <span className="w-8 text-center font-bold text-foreground text-sm">{quantity}</span>
-                <button
-                  onClick={() => updateQuantity(product.id, quantity + 1)}
-                  className="p-1.5 rounded-lg bg-muted text-foreground hover:bg-primary/20 transition-colors"
-                >
-                  <Plus className="w-3.5 h-3.5" />
+                  <Trash2 className="w-4 h-4" />
                 </button>
               </div>
 
-              <p className="font-bold text-foreground w-28 text-right">{formatPrice(product.price * quantity)}</p>
+              <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-4 sm:shrink-0">
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => updateQuantity(product.id, quantity - 1)}
+                    className="p-1.5 rounded-lg bg-muted text-foreground hover:bg-primary/20 transition-colors"
+                    aria-label="Decrease quantity"
+                  >
+                    <Minus className="w-3.5 h-3.5" />
+                  </button>
+                  <span className="w-8 text-center font-bold text-foreground text-sm">{quantity}</span>
+                  <button
+                    onClick={() => updateQuantity(product.id, quantity + 1)}
+                    className="p-1.5 rounded-lg bg-muted text-foreground hover:bg-primary/20 transition-colors"
+                    aria-label="Increase quantity"
+                  >
+                    <Plus className="w-3.5 h-3.5" />
+                  </button>
+                </div>
 
-              <button
-                onClick={() => removeFromCart(product.id)}
-                className="p-2 text-muted-foreground hover:text-destructive transition-colors"
-              >
-                <Trash2 className="w-4 h-4" />
-              </button>
+                <p className="font-bold text-foreground text-right whitespace-nowrap sm:w-28">{formatPrice(product.price * quantity)}</p>
+
+                <button
+                  onClick={() => removeFromCart(product.id)}
+                  className="p-2 text-muted-foreground hover:text-destructive transition-colors hidden sm:inline-flex"
+                  aria-label="Remove"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </div>
             </div>
           ))}
         </div>

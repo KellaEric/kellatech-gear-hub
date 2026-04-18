@@ -30,7 +30,7 @@ const Index = () => {
       <Navbar />
 
       {/* Hero */}
-      <section className="relative mt-16 min-h-[85vh] flex items-center overflow-hidden">
+      <section className="relative mt-16 min-h-[80vh] sm:min-h-[85vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,hsl(18_100%_57%_/_0.08),transparent_50%),radial-gradient(circle_at_80%_80%,hsl(18_100%_57%_/_0.05),transparent_50%)]" />
         <div className="absolute -top-1/2 -right-[10%] w-[600px] h-[600px] bg-gradient-to-br from-primary/15 to-secondary/5 rounded-full blur-[80px] pointer-events-none" />
 

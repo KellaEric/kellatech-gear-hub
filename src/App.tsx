@@ -19,6 +19,7 @@ import Checkout from "./pages/Checkout";
 import Orders from "./pages/Orders";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
+import AssistantWidget from "./components/AssistantWidget";
 
 const queryClient = new QueryClient();
 
@@ -46,6 +47,7 @@ const App = () => (
               <Route path="/admin" element={<Admin />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
+            <AssistantWidget />
           </BrowserRouter>
         </CartProvider>
       </AuthProvider>
