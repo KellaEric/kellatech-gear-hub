@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Monitor, Cpu, Printer, Wifi, Laptop, Mouse, ShoppingCart, Package, Tag, Truck, CreditCard, Sparkles } from "lucide-react";
+import { ArrowRight, Monitor, Cpu, Printer, Wifi, Laptop, Mouse } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
 import FeaturedCarousel from "@/components/FeaturedCarousel";
 import { useProducts } from "@/data/products";
+import heroBanner from "@/assets/hero-banner.png";
 
 const categoryDefs = [
   { name: "Laptops", icon: Laptop },
