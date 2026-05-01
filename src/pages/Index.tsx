@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Monitor, Cpu, Printer, Wifi, Laptop, Mouse } from "lucide-react";
+import { ArrowRight, Monitor, Cpu, Printer, Wifi, Laptop, Mouse, ShoppingCart, Package, Tag, Truck, CreditCard, Sparkles } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
@@ -36,9 +36,27 @@ const Index = () => {
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-16 text-center">
           <div className="animate-fade-in-up">
-            <span className="inline-flex items-center gap-2 bg-primary/15 border border-primary/30 text-primary font-semibold text-sm px-5 py-2 rounded-full mb-6">
-              📍 Based in Ghana — Serving All of Africa
-            </span>
+            <div className="flex justify-center items-end gap-3 sm:gap-5 mb-8 h-20">
+              {[
+                { Icon: ShoppingCart, delay: 0 },
+                { Icon: Package, delay: 0.15 },
+                { Icon: Tag, delay: 0.3 },
+                { Icon: Sparkles, delay: 0.45 },
+                { Icon: CreditCard, delay: 0.6 },
+                { Icon: Truck, delay: 0.75 },
+              ].map(({ Icon, delay }, i) => (
+                <div
+                  key={i}
+                  className="relative ecom-icon"
+                  style={{ animationDelay: `${delay}s, ${delay + 0.7}s` }}
+                >
+                  <span className="absolute inset-0 rounded-2xl bg-primary/20 blur-xl ecom-pulse-ring" style={{ animationDelay: `${delay}s` }} />
+                  <div className="relative flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/30 backdrop-blur-sm">
+                    <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary" strokeWidth={2.5} />
+                  </div>
+                </div>
+              ))}
+            </div>
 
             <div className="marquee-mask overflow-hidden mb-6 -mx-4 sm:-mx-6">
               <div className="marquee">
