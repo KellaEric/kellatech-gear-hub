@@ -18,8 +18,9 @@ const About = () => (
 
     {/* Header */}
     <div className="mt-16 gradient-primary py-16 text-center">
-      <h1 className="text-3xl sm:text-5xl font-black text-primary-foreground mb-3">About KELLASTECH</h1>
-      <p className="text-primary-foreground/80 text-lg">Doctor of Technology — Your All-in-One Tech Partner</p>
+      <p className="max-w-3xl mx-auto px-4 text-primary-foreground text-lg sm:text-xl leading-relaxed">
+        At Kellastech E-commerce, we make shopping simple, fast, and enjoyable. Our platform is designed to bring quality products closer to you, with trusted vendors, affordable prices, and a smooth user experience from browsing to delivery.
+      </p>
     </div>
 
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16">
