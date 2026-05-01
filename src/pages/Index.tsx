@@ -40,17 +40,20 @@ const Index = () => {
               📍 Based in Ghana — Serving All of Africa
             </span>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black text-foreground leading-[1.1] mb-6">
-              <span className="inline-block opacity-0 animate-[fade-in_0.8s_ease-out_0.1s_forwards]">Your</span>{" "}
-              <span className="inline-block opacity-0 animate-[fade-in_0.8s_ease-out_0.25s_forwards]">All-in-One</span>{" "}
-              <span className="inline-block opacity-0 animate-[fade-in_0.8s_ease-out_0.4s_forwards]">Technology</span>{" "}
-              <span className="inline-block opacity-0 animate-[fade-in_0.8s_ease-out_0.55s_forwards]">Partner</span>{" "}
-              <span className="inline-block opacity-0 animate-[fade-in_0.8s_ease-out_0.7s_forwards]">to</span>{" "}
-              <span className="inline-block opacity-0 animate-[fade-in_0.8s_ease-out_0.85s_forwards]">build</span>{" "}
-              <span className="text-gradient inline-block opacity-0 animate-[fade-in_1s_ease-out_1.1s_forwards] bg-[length:200%_auto] animate-[fade-in_1s_ease-out_1.1s_forwards,shimmer_3s_ease-in-out_2s_infinite]">
-                next-generation Tech solutions and ecosystem
-              </span>
-            </h1>
+            <div className="marquee-mask overflow-hidden mb-6 -mx-4 sm:-mx-6">
+              <div className="marquee">
+                {Array.from({ length: 6 }).map((_, i) => (
+                  <h3
+                    key={i}
+                    className="text-xl sm:text-2xl lg:text-3xl font-black text-foreground px-8 whitespace-nowrap"
+                  >
+                    Your All-in-One Technology Partner to build{" "}
+                    <span className="text-gradient">next-generation Tech solutions and ecosystem</span>
+                    <span className="text-primary mx-6">✦</span>
+                  </h3>
+                ))}
+              </div>
+            </div>
 
             <div className="max-w-3xl mx-auto bg-card/50 border border-primary/20 rounded-xl p-6 backdrop-blur-sm mb-8">
               <p className="text-lg sm:text-xl text-foreground font-semibold mb-3">Computers &amp; Accessories Store</p>
