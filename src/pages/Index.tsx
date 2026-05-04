@@ -34,22 +34,25 @@ const Index = () => {
       <section className="relative mt-16 overflow-hidden bg-background">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,hsl(18_100%_57%_/_0.08),transparent_50%),radial-gradient(circle_at_80%_80%,hsl(18_100%_57%_/_0.05),transparent_50%)]" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-6 pb-10">
-          <div className="rounded-2xl overflow-hidden border border-primary/20 shadow-2xl glow-primary">
+          <div className="relative rounded-2xl overflow-hidden border border-primary/20 shadow-2xl glow-primary">
             <img
               src={heroBanner}
-              alt="Kella's Tech — Your All-in-One Technology Partner. Services: Software Development, IT Support, Mentoring, Hardware Repairs, CCTV Installation, Sales of laptops & accessories."
+              alt="Kella's Tech — Your All-in-One Technology Partner."
               className="w-full h-auto block"
               loading="eager"
             />
-          </div>
+            {/* Readable gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/50 to-transparent sm:bg-gradient-to-r sm:from-background/90 sm:via-background/40 sm:to-transparent" />
 
-          <div className="flex flex-wrap justify-center gap-4 mt-8">
-            <Link to="/shop" className="inline-flex items-center gap-2 px-8 py-3.5 gradient-primary text-primary-foreground font-bold rounded-lg glow-primary hover:opacity-90 transition-all text-lg">
-              Shop Now <ArrowRight className="w-5 h-5" />
-            </Link>
-            <Link to="/contact" className="inline-flex items-center gap-2 px-8 py-3.5 bg-foreground/10 border-2 border-foreground/30 text-foreground font-bold rounded-lg hover:bg-primary/20 hover:border-primary transition-all text-lg">
-              Contact Us
-            </Link>
+            {/* Overlaid CTAs */}
+            <div className="absolute inset-x-0 bottom-0 p-4 sm:p-8 md:p-12 flex flex-wrap gap-3 sm:gap-4 justify-center sm:justify-start">
+              <Link to="/shop" className="inline-flex items-center gap-2 px-5 sm:px-8 py-2.5 sm:py-3.5 gradient-primary text-primary-foreground font-bold rounded-lg glow-primary hover:opacity-90 transition-all text-sm sm:text-lg">
+                Shop Now <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+              </Link>
+              <Link to="/contact" className="inline-flex items-center gap-2 px-5 sm:px-8 py-2.5 sm:py-3.5 bg-background/70 backdrop-blur-sm border-2 border-foreground/30 text-foreground font-bold rounded-lg hover:bg-primary/20 hover:border-primary transition-all text-sm sm:text-lg">
+                Contact Us
+              </Link>
+            </div>
           </div>
         </div>
       </section>
