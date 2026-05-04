@@ -46,7 +46,7 @@ const Footer = () => (
           <div className="space-y-3 text-sm text-muted-foreground">
             <p className="flex items-center gap-2"><Phone className="w-4 h-4 text-primary" /> 0201926457 / 0547983235</p>
             <p className="flex items-center gap-2"><Mail className="w-4 h-4 text-primary" /> kellastechnology@gmail.com</p>
-            <p className="flex items-center gap-2"><Globe className="w-4 h-4 text-primary" /> dev-kellatech.pantheonsite.io</p>
+            
             <p className="flex items-center gap-2"><MapPin className="w-4 h-4 text-primary" /> Accra, Ghana</p>
           </div>
         </div>
