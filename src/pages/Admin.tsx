@@ -9,6 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import OrdersManagement from "@/components/admin/OrdersManagement";
+import ImageCropDialog from "@/components/admin/ImageCropDialog";
 
 const categoryOptions: string[] = categories.filter((c) => c !== "All") as unknown as string[];
 
@@ -53,24 +54,31 @@ const Admin = () => {
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [cropSrc, setCropSrc] = useState<string | null>(null);
 
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImagePick = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+    e.target.value = ""; // allow re-selecting the same file
     if (!file) return;
     if (!file.type.startsWith("image/")) {
       toast({ title: "Please select an image file", variant: "destructive" });
       return;
     }
-    if (file.size > 5 * 1024 * 1024) {
-      toast({ title: "Image must be under 5MB", variant: "destructive" });
+    if (file.size > 10 * 1024 * 1024) {
+      toast({ title: "Image must be under 10MB", variant: "destructive" });
       return;
     }
+    const reader = new FileReader();
+    reader.onload = () => setCropSrc(reader.result as string);
+    reader.readAsDataURL(file);
+  };
+
+  const handleCroppedSave = async (blob: Blob) => {
     setUploading(true);
-    const ext = file.name.split(".").pop();
-    const fileName = `${crypto.randomUUID()}.${ext}`;
+    const fileName = `${crypto.randomUUID()}.jpg`;
     const { error: uploadError } = await supabase.storage
       .from("product-images")
-      .upload(fileName, file, { cacheControl: "3600", upsert: false });
+      .upload(fileName, blob, { cacheControl: "3600", upsert: false, contentType: "image/jpeg" });
     if (uploadError) {
       toast({ title: "Upload failed", description: uploadError.message, variant: "destructive" });
       setUploading(false);
@@ -79,6 +87,7 @@ const Admin = () => {
     const { data: { publicUrl } } = supabase.storage.from("product-images").getPublicUrl(fileName);
     setForm((f) => ({ ...f, image: publicUrl }));
     setUploading(false);
+    setCropSrc(null);
     toast({ title: "Image uploaded!" });
   };
 
@@ -305,7 +314,7 @@ const Admin = () => {
                       <input
                         type="file"
                         accept="image/*"
-                        onChange={handleImageUpload}
+                        onChange={handleImagePick}
                         disabled={uploading}
                         className="hidden"
                       />
