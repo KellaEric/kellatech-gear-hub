@@ -217,6 +217,12 @@ const Admin = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <ImageCropDialog
+        open={!!cropSrc}
+        imageSrc={cropSrc}
+        onCancel={() => setCropSrc(null)}
+        onSave={handleCroppedSave}
+      />
       <Navbar />
       <div className="pt-20 pb-12 px-4 max-w-7xl mx-auto">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
