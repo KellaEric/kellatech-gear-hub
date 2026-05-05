@@ -21,6 +21,7 @@ import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 import AssistantWidget from "./components/AssistantWidget";
 import WhatsAppButton from "./components/WhatsAppButton";
+import GlobalReveal from "./components/GlobalReveal";
 
 const queryClient = new QueryClient();
 
@@ -50,6 +51,7 @@ const App = () => (
             </Routes>
             <AssistantWidget />
             <WhatsAppButton />
+            <GlobalReveal />
           </BrowserRouter>
         </CartProvider>
       </AuthProvider>
